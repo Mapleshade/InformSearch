@@ -1,0 +1,16 @@
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\obj\Debug\Spider.csprojResolveAssemblyReference.cache
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\Spider.exe
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\Spider.pdb
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\System.IO.dll
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\System.Runtime.dll
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\System.Security.Cryptography.Algorithms.dll
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\System.Net.Http.Extensions.xml
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\obj\Debug\Spider.exe
+C:\Users\Elina\RiderProjects\IS\Spider\Spider\obj\Debug\Spider.pdb
