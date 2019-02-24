@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using HtmlAgilityPack;
 
@@ -6,9 +8,20 @@ namespace Spider
 {
     class Program
     {
-        public static void Main(string[] args)
+        private static List<string> initialFileNames;
+
+        private static string pathForInitialFiles =
+            "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\original\\";
+
+        private static string pathForPorterFiles =
+            "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\porter\\";
+
+        static void Main(string[] args)
         {
+            initialFileNames = new List<string>();
             XPath();
+            CopyFiles(pathForInitialFiles, pathForPorterFiles);
+            DoPorter();
         }
 
         private static void XPath()
@@ -56,7 +69,7 @@ namespace Spider
                         }
                     }
 
-                    SaveIntoFile(namePost, text);
+                    SaveIntoFile(namePost, text, pathForInitialFiles);
                 }
             }
         }
@@ -67,18 +80,76 @@ namespace Spider
             return web.Load(url);
         }
 
-        private static void SaveIntoFile(string namePost, string textPost)
+        private static void SaveIntoFile(string namePost, string textPost, string path)
         {
-            var fullPath = "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\";
+            //   var fullPath = "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\original\\";
+            var fullPath = path;
             if (namePost.EndsWith("."))
             {
                 fullPath += namePost + "txt";
+                if (path == pathForInitialFiles)
+                {
+                    initialFileNames.Add(namePost + "txt");
+                }
             }
             else
             {
                 fullPath += namePost + ".txt";
+                if (path == pathForInitialFiles)
+                {
+                    initialFileNames.Add(namePost + ".txt");
+                }
             }
+
             File.WriteAllText(fullPath, textPost);
+        }
+
+        private static void CopyFiles(string sourcePath, string destinationPath)
+        {
+            foreach (var fileName in initialFileNames)
+            {
+                File.Copy(sourcePath + fileName, destinationPath + fileName, true);
+            }
+        }
+
+        private static void DoPorter()
+        {
+            var porter = new Porter();
+            
+
+            foreach (var fileName in initialFileNames)
+            {
+                var textToProcess = File.ReadAllText(pathForPorterFiles + fileName);
+                var textAfterProcess = "";
+                var startIndex = 0;
+                for (var index = 0; index < textToProcess.Length; index++)
+                {
+                    var symbol = textToProcess[index];
+
+                    if (symbol == ' ' || symbol == '!' || symbol == '?' || symbol == '.' || symbol == ',')
+                    {
+                        var endIndex = index;
+                        var word = "";
+                        var temp = string.Copy(textToProcess);
+                        var len = endIndex - startIndex;
+
+                        if (len > 0)
+                        {
+                            word += temp.Substring(startIndex, len);
+                            Console.WriteLine(word);
+                            if (!porter.particles.Contains(word))
+                            {
+                                Console.WriteLine(word + " in if");
+                                word = porter.Stemm(word);
+                            }
+                            textAfterProcess += word + " ";
+                            startIndex = endIndex + 1;
+                        }
+                    }
+                }
+
+                File.WriteAllText(pathForPorterFiles + fileName, textAfterProcess);
+            }
         }
     }
 }
