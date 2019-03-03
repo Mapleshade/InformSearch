@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Spider
@@ -31,35 +33,11 @@ namespace Spider
         public Porter()
         {
             particles = new HashSet<string>();
-            particles.Add("не");
-            particles.Add("с");
-            particles.Add("на");
-            particles.Add("в");
-            particles.Add("по");
-            particles.Add("при");
-            particles.Add("про");
-            particles.Add("ну");
-            particles.Add("ли");
-            particles.Add("ль");
-            particles.Add("ни");
-            particles.Add("хотя");
-            particles.Add("под");
-            particles.Add("над");
-            particles.Add("о");
-            particles.Add("об");
-            particles.Add("со");
-            particles.Add("без");
-            particles.Add("надо");
-            particles.Add("из-под");
-            particles.Add("из-за");
-            particles.Add("по-над");
-            particles.Add("во");
-            particles.Add("а");
-            particles.Add("и");
-            particles.Add("но");
-            particles.Add("то");
-            particles.Add("ещё");
-            
+            var stopWords = File.ReadLines("C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\stop-list.txt");
+            foreach (var stopWord in stopWords)
+            {
+                particles.Add(stopWord);
+            }
         }
 
         public string Stemm(string word)

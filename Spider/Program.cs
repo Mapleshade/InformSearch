@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using HtmlAgilityPack;
 
@@ -10,15 +12,25 @@ namespace Spider
     {
         private static List<string> initialFileNames;
 
+        private static HashSet<string> words;
+
         private static string pathForInitialFiles =
             "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\original\\";
 
         private static string pathForPorterFiles =
             "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\porter\\";
 
-        static void Main(string[] args)
+        private static string pathForInvertIndexFiles =
+            "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\invertIndex\\";
+
+        private static IDictionary<string, IEnumerable<string>> invertIndexes;
+
+        private static void Main(string[] args)
         {
             initialFileNames = new List<string>();
+            words = new HashSet<string>();
+            invertIndexes = new Dictionary<string, IEnumerable<string>>();
+
             XPath();
             CopyFiles(pathForInitialFiles, pathForPorterFiles);
             DoPorter();
@@ -112,21 +124,23 @@ namespace Spider
             }
         }
 
-        private static void DoPorter()
+        private static void DoPorter() //todo: не помешает добавить чистку от лишних пробелов, а то лагает чутка
         {
             var porter = new Porter();
-            
 
             foreach (var fileName in initialFileNames)
             {
+                var linksForWord = new HashSet<string>();
                 var textToProcess = File.ReadAllText(pathForPorterFiles + fileName);
                 var textAfterProcess = "";
                 var startIndex = 0;
+                
                 for (var index = 0; index < textToProcess.Length; index++)
                 {
                     var symbol = textToProcess[index];
 
-                    if (symbol == ' ' || symbol == '!' || symbol == '?' || symbol == '.' || symbol == ',')
+                    if (symbol == ' ' || symbol == '!' || symbol == '?' || symbol == '.' || symbol == ',' ||
+                        symbol == '(' || symbol == ')' || symbol == ':' || symbol == ';' || symbol == '_')
                     {
                         var endIndex = index;
                         var word = "";
@@ -136,20 +150,46 @@ namespace Spider
                         if (len > 0)
                         {
                             word += temp.Substring(startIndex, len);
-                            Console.WriteLine(word);
-                            if (!porter.particles.Contains(word))
-                            {
-                                Console.WriteLine(word + " in if");
-                                word = porter.Stemm(word);
-                            }
+                            word = word.ToLower();
+
+                            word = !porter.particles.Contains(word) ? porter.Stemm(word) : "";
                             textAfterProcess += word + " ";
                             startIndex = endIndex + 1;
+
+                            if (words.Add(word))
+                            {
+                                linksForWord.Add(fileName); //todo: нужна ссылка или имя фйала?
+                            }
                         }
+
+                        if (invertIndexes.Keys.Contains(word))
+                        {
+                            invertIndexes[word].Union(linksForWord);
+                        }
+                        else
+                        {
+                            invertIndexes.Add(word, linksForWord);
+                        }
+                            
                     }
                 }
-
                 File.WriteAllText(pathForPorterFiles + fileName, textAfterProcess);
+                WriteInverIndexesInFile();
             }
+        }
+
+        private static void WriteInverIndexesInFile()
+        {
+            var str = "";
+            foreach (var invertIndexesKey in invertIndexes.Keys)
+            {
+                str += invertIndexesKey + ":\n";
+                str += "Встречается в файлах:" + "\n";
+                str = invertIndexes[invertIndexesKey].Aggregate(str, (current, link) => current + (link + "\n"));
+                str += "\n";
+                
+            }
+            File.WriteAllText(pathForInvertIndexFiles + "inverted Indexes.txt", str);
         }
     }
 }
