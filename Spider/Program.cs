@@ -17,23 +17,28 @@ namespace Spider
         private static string pathForInitialFiles =
             "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\original\\";
 
-        private static string pathForPorterFiles =
+        public static string pathForPorterFiles =
             "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\porter\\";
 
         private static string pathForInvertIndexFiles =
             "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\invertIndex\\";
 
-        private static IDictionary<string, IEnumerable<string>> invertIndexes;
+
+        private static Dictionary<string, IEnumerable<string>> invertIndexes;
+
+        private static Dictionary<string, int> countsWordsInDocuments;
 
         private static void Main(string[] args)
         {
             initialFileNames = new List<string>();
             words = new HashSet<string>();
             invertIndexes = new Dictionary<string, IEnumerable<string>>();
+            countsWordsInDocuments = new Dictionary<string, int>();
 
             XPath();
             CopyFiles(pathForInitialFiles, pathForPorterFiles);
             DoPorter();
+            DoTFIDF();
         }
 
         private static void XPath()
@@ -94,7 +99,6 @@ namespace Spider
 
         private static void SaveIntoFile(string namePost, string textPost, string path)
         {
-            //   var fullPath = "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\original\\";
             var fullPath = path;
             if (namePost.EndsWith("."))
             {
@@ -134,7 +138,8 @@ namespace Spider
                 var textToProcess = File.ReadAllText(pathForPorterFiles + fileName);
                 var textAfterProcess = "";
                 var startIndex = 0;
-                
+                var count = 0;
+
                 for (var index = 0; index < textToProcess.Length; index++)
                 {
                     var symbol = textToProcess[index];
@@ -149,6 +154,7 @@ namespace Spider
 
                         if (len > 0)
                         {
+                            count++;
                             word += temp.Substring(startIndex, len);
                             word = word.ToLower();
 
@@ -170,13 +176,15 @@ namespace Spider
                         {
                             invertIndexes.Add(word, linksForWord);
                         }
-                            
                     }
                 }
+
+                countsWordsInDocuments.Add(fileName, count);
                 File.WriteAllText(pathForPorterFiles + fileName, textAfterProcess);
                 WriteInverIndexesInFile();
             }
         }
+
 
         private static void WriteInverIndexesInFile()
         {
@@ -187,9 +195,15 @@ namespace Spider
                 str += "Встречается в файлах:" + "\n";
                 str = invertIndexes[invertIndexesKey].Aggregate(str, (current, link) => current + (link + "\n"));
                 str += "\n";
-                
             }
+
             File.WriteAllText(pathForInvertIndexFiles + "inverted Indexes.txt", str);
+        }
+
+        private static void DoTFIDF()
+        {
+            var tfidf = new TFIDF();
+            tfidf.Init(invertIndexes, countsWordsInDocuments);
         }
     }
 }
