@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd57d0ef-5755-493c-b4ea-4f7768efd04a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Spider/VecSearch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Spider/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Spider/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Spider/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Spider/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spider/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spider/Spider.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/Spider.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spider/TFIDF.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/TFIDF.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spider/outputs/TFIDF/TFIDF.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/outputs/TFIDF/TFIDF.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spider/outputs/invertIndex/inverted Indexes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Spider/outputs/invertIndex/inverted Indexes.txt" afterDir="false" />
-    </list>
+    <list default="true" id="fd57d0ef-5755-493c-b4ea-4f7768efd04a" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,8 +115,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Spider/VecSearch.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-139">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="405">
+              <caret line="54" column="17" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="17" />
               <folding>
                 <marker date="1552869860090" expanded="true" signature="6:69" ph="..." />
                 <marker date="1552869860090" expanded="true" signature="120:2225" ph="{...}" />
@@ -261,12 +252,12 @@
       <workItem from="1551009005507" duration="11229000" />
       <workItem from="1551614582020" duration="7876000" />
       <workItem from="1552244199064" duration="10865000" />
-      <workItem from="1552852722981" duration="14977000" />
+      <workItem from="1552852722981" duration="17391000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57398000" />
+    <option name="totallyTimeSpent" value="59812000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -279,24 +270,23 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10660981" />
       <window_info id="Structure" order="1" side_tool="true" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="NuGet" order="0" sideWeight="0.69912475" weight="0.32932165" />
-      <window_info anchor="bottom" id="Performance Profiler" order="1" />
+      <window_info anchor="bottom" id="NuGet" order="0" sideWeight="0.69912475" weight="0.32827735" />
+      <window_info anchor="bottom" id="Performance Profiler" order="1" weight="0.32936078" />
       <window_info anchor="bottom" id="Docker" order="2" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.25785482" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.68443495" visible="true" weight="0.25785482" />
       <window_info anchor="bottom" id="TODO" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="5" />
       <window_info anchor="bottom" id="Unit Tests" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="7" sideWeight="0.93336886" weight="0.12026002" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.06663113" side_tool="true" weight="0.2751896" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="9" sideWeight="0.31556502" side_tool="true" visible="true" weight="0.25785482" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32936078" />
       <window_info anchor="bottom" id="Build" order="11" sideWeight="0.49946696" weight="0.39653304" />
       <window_info anchor="bottom" id="Find" order="12" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
@@ -439,8 +429,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Spider/VecSearch.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-139">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="405">
+          <caret line="54" column="17" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="17" />
           <folding>
             <marker date="1552869860090" expanded="true" signature="6:69" ph="..." />
             <marker date="1552869860090" expanded="true" signature="120:2225" ph="{...}" />
