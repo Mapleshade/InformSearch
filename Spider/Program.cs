@@ -24,7 +24,7 @@ namespace Spider
             "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\invertIndex\\";
 
 
-        private static Dictionary<string, IEnumerable<string>> invertIndexes;
+        private static Dictionary<string, HashSet<string>> invertIndexes;
 
         private static Dictionary<string, int> countsWordsInDocuments;
 
@@ -32,13 +32,14 @@ namespace Spider
         {
             initialFileNames = new List<string>();
             words = new HashSet<string>();
-            invertIndexes = new Dictionary<string, IEnumerable<string>>();
+            invertIndexes = new Dictionary<string, HashSet<string>>();
             countsWordsInDocuments = new Dictionary<string, int>();
 
             XPath();
             CopyFiles(pathForInitialFiles, pathForPorterFiles);
             DoPorter();
             DoTFIDF();
+            DoVecSearch();
         }
 
         private static void XPath()
@@ -134,7 +135,6 @@ namespace Spider
 
             foreach (var fileName in initialFileNames)
             {
-                var linksForWord = new HashSet<string>();
                 var textToProcess = File.ReadAllText(pathForPorterFiles + fileName);
                 var textAfterProcess = "";
                 var startIndex = 0;
@@ -162,19 +162,19 @@ namespace Spider
                             textAfterProcess += word + " ";
                             startIndex = endIndex + 1;
 
-                            if (words.Add(word))
+                            if (!string.IsNullOrEmpty(word))
                             {
-                                linksForWord.Add(fileName); //todo: нужна ссылка или имя фйала?
+                                if (invertIndexes.Keys.Contains(word))
+                                {
+                                    invertIndexes[word].Add(fileName);
+                                }
+                                else
+                                {
+                                    var linksForWord = new HashSet<string>
+                                        {fileName}; //todo: нужна ссылка или имя фйала?
+                                    invertIndexes.Add(word, linksForWord);
+                                }
                             }
-                        }
-
-                        if (invertIndexes.Keys.Contains(word))
-                        {
-                            invertIndexes[word].Union(linksForWord);
-                        }
-                        else
-                        {
-                            invertIndexes.Add(word, linksForWord);
                         }
                     }
                 }
@@ -204,6 +204,12 @@ namespace Spider
         {
             var tfidf = new TFIDF();
             tfidf.Init(invertIndexes, countsWordsInDocuments);
+        }
+
+        private static void DoVecSearch()
+        {
+            var search = new VecSearch();
+            search.Init(invertIndexes, initialFileNames, TFIDF.TF, TFIDF.IDF);
         }
     }
 }

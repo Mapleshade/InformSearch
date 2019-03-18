@@ -18,6 +18,7 @@
         <e p="Spider.csproj" t="IncludeRecursive" />
         <e p="stop-list.txt" t="Include" />
         <e p="TFIDF.cs" t="Include" />
+        <e p="VecSearch.cs" t="Include" />
       </e>
       <e p="Spider.sln" t="IncludeFlat" />
     </e>

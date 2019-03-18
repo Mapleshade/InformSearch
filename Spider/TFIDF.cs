@@ -8,9 +8,9 @@ namespace Spider
 {
     public class TFIDF
     {
-        private IDictionary<string, IEnumerable<int>> counts;
-        private IDictionary<string, List<double>> TF;
-        private Dictionary<string, double> IDF;
+        private IDictionary<string, List<int>> counts;
+        public static IDictionary<string, List<double>> TF { get; private set; }
+        public static Dictionary<string, double> IDF { get; private set; }
 
         private static string pathForTFIDFIndexFiles =
             "C:\\Users\\Elina\\RiderProjects\\IS\\Spider\\Spider\\outputs\\TFIDF\\";
@@ -18,10 +18,10 @@ namespace Spider
         /// <summary>
         ///     Инициализировать сервис
         /// </summary>
-        public void Init(Dictionary<string, IEnumerable<string>> invertIndexes,
+        public void Init(Dictionary<string, HashSet<string>> invertIndexes,
             Dictionary<string, int> countsWordsInDocuments)
         {
-            counts = new Dictionary<string, IEnumerable<int>>();
+            counts = new Dictionary<string, List<int>>();
             TF = new Dictionary<string, List<double>>();
             IDF = new Dictionary<string, double>();
             foreach (var word in invertIndexes.Keys)
@@ -41,7 +41,7 @@ namespace Spider
         }
 
         /// <summary>
-        /// посчитать все употребления слова в документе
+        /// посчитать все употребления слова в документе 
         /// </summary>
         /// <param name="word">слово</param>
         /// <param name="document">исходный документ</param>
@@ -51,7 +51,6 @@ namespace Spider
             //счетчик 
             var count = 0;
             var startIndex = 0;
-            var porter = new Porter();
 
             //для всех символов в тексте
             for (var index = 0; index < document.Length; index++)
@@ -70,8 +69,6 @@ namespace Spider
                     {
                         wordFromText += temp.Substring(startIndex, len);
                         wordFromText = wordFromText.ToLower();
-
-                        wordFromText = !porter.particles.Contains(wordFromText) ? porter.Stemm(wordFromText) : "";
                         startIndex = endIndex + 1;
 
                         if (wordFromText == word)
@@ -99,7 +96,7 @@ namespace Spider
         }
 
         /// <summary>
-        ///     посчитать TF слова в одном документе
+        ///     посчитать TF слова в одном документе 
         /// </summary>
         /// <param name="word">слово</param>
         /// <param name="idDocument">айдишник документа, в котором встречается слово</param>
@@ -107,7 +104,7 @@ namespace Spider
         /// <returns>частота слова в документе</returns>
         private double FindTFInOneDocument(string word, int idDocument, int countAllWordsInDocument)
         {
-            return counts[word].ToArray()[idDocument] / countAllWordsInDocument;
+            return (double) counts[word].ToArray()[idDocument] / (double) countAllWordsInDocument;
         }
 
         /// <summary>
@@ -119,7 +116,7 @@ namespace Spider
         /// <returns></returns>
         private double FindIDF(string word, int countAllDocuments, int countDocumentsWithWord)
         {
-            return Math.Log10(countAllDocuments / countDocumentsWithWord);
+            return Math.Log10((double) countAllDocuments / (double) countDocumentsWithWord);
         }
 
         private void WriteToFile()
@@ -131,7 +128,7 @@ namespace Spider
                 str += "TF: " + "\n";
                 for (var i = 0; i < TF[word].Count; i++)
                 {
-                    str += TF[word][i] + " - " + "в документе №" + i;
+                    str += TF[word][i] + " - " + "в документе №" + i + "\n";
                 }
 
                 str += "\n";
