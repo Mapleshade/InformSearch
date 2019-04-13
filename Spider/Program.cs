@@ -35,11 +35,12 @@ namespace Spider
             invertIndexes = new Dictionary<string, HashSet<string>>();
             countsWordsInDocuments = new Dictionary<string, int>();
 
-            XPath();
-            CopyFiles(pathForInitialFiles, pathForPorterFiles);
-            DoPorter();
-            DoTFIDF();
-            DoVecSearch();
+//            XPath();
+//            CopyFiles(pathForInitialFiles, pathForPorterFiles);
+//            DoPorter();
+//            DoTFIDF();
+//            DoVecSearch();
+              Search("мотоцикл зимой");
         }
 
         private static void XPath()
@@ -129,7 +130,7 @@ namespace Spider
             }
         }
 
-        private static void DoPorter() //todo: не помешает добавить чистку от лишних пробелов, а то лагает чутка
+        public static void DoPorter() //todo: не помешает добавить чистку от лишних пробелов, а то лагает чутка
         {
             var porter = new Porter();
 
@@ -210,6 +211,12 @@ namespace Spider
         {
             var search = new VecSearch();
             search.Init(invertIndexes, initialFileNames, TFIDF.TF, TFIDF.IDF);
+        }
+
+        private static void Search(string request)
+        {
+            var search = new VecSearch();
+            search.Search(request);
         }
     }
 }
