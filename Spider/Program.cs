@@ -40,9 +40,11 @@ namespace Spider
 //            DoPorter();
 //            DoTFIDF();
 //            DoVecSearch();
-              VectorSearch("мотоцикл зимой ");
-              Console.WriteLine();
-              BoolSearch("мотоцикл зимой ");
+              //VectorSearch("мотоцикл зимой ");
+             // Console.WriteLine();
+             // BoolSearch("мотоцикл зимой ");
+             PageRank rank = new PageRank();
+             rank.DoPageRank();
         }
 
         private static void XPath()
@@ -95,7 +97,7 @@ namespace Spider
             }
         }
 
-        private static HtmlDocument GetHtmlDocument(string url)
+        public static HtmlDocument GetHtmlDocument(string url)
         {
             var web = new HtmlWeb();
             return web.Load(url);

@@ -11,6 +11,7 @@
         <e p="obj" t="ExcludeRecursive" />
         <e p="outputs" t="Include" />
         <e p="packages.config" t="Include" />
+        <e p="PageRank.cs" t="Include" />
         <e p="Porter.cs" t="Include" />
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
