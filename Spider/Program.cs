@@ -40,7 +40,9 @@ namespace Spider
 //            DoPorter();
 //            DoTFIDF();
 //            DoVecSearch();
-              Search("мотоцикл зимой");
+              VectorSearch("мотоцикл зимой ");
+              Console.WriteLine();
+              BoolSearch("мотоцикл зимой ");
         }
 
         private static void XPath()
@@ -213,9 +215,15 @@ namespace Spider
             search.Init(invertIndexes, initialFileNames, TFIDF.TF, TFIDF.IDF);
         }
 
-        private static void Search(string request)
+        private static void VectorSearch(string request)
         {
             var search = new VecSearch();
+            search.Search(request);
+        }
+        
+        private static void BoolSearch(string request)
+        {
+            var search = new BoolSearch();
             search.Search(request);
         }
     }

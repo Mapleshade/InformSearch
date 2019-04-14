@@ -187,8 +187,6 @@ namespace Spider
                 var len1 = 0d;
                 var len2 = 0d;
                 
-                Console.WriteLine("vector.Value.Count " + vector.Value.Count);
-                Console.WriteLine("vectorReques " + vectorRequest.Count);
                 for (int k = 0; k < vector.Value.Count; k++)
                 {
                     result += vector.Value[k] * vectorRequest[k];
@@ -202,10 +200,10 @@ namespace Spider
                 
             }
 
-            Console.WriteLine("для запроса " + request +  " составлен список совпадений: ");
+            Console.WriteLine("для запроса \"" + request +  "\" составлен список совпадений: ");
             foreach (var result in results)
             {
-                Console.WriteLine("вероятность найдти информацию по запросу в документе " + result.Key + " равна " + result.Value * 100);
+                Console.WriteLine("вероятность найдти информацию по запросу в документе \"" + result.Key + "\" равна: " + result.Value * 100);
                 
             }
         }

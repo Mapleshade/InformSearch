@@ -7,6 +7,7 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="Spider" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
+        <e p="BoolSearch.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
         <e p="outputs" t="Include" />
         <e p="packages.config" t="Include" />
